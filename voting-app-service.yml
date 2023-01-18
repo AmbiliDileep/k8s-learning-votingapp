@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-app-service
+  labels:
+    name: voting-app-srvc
+    app: demo-microservice    
+spec:
+  type: LoadBalancer
+  selector:
+      name: voting-app-pod
+      app: demo-microservice     
+  ports:
+    - port: 80
+      targetPort: 80
+

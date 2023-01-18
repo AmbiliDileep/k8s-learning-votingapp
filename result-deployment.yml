@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-deploy
+  labels:
+    name: result-deploy
+    app: demo-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: result-pod
+      app: demo-microservice      
+  template:
+    metadata:
+      name: result-pod
+      labels:
+        name: result-pod
+        app: demo-microservice 
+    spec:
+      containers:
+        - name: result-container
+          image: kodekloud/examplevotingapp_result:v1
+          ports:
+            - containerPort: 80

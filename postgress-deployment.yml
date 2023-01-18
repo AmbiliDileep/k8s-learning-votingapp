@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgress-deploy
+  labels:
+    name: postgress-deploy
+    app: demo-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgress-pod
+      app: demo-microservice     
+  template:
+    metadata:
+      name: postgress-pod
+      labels:
+        name: postgress-pod
+        app: demo-microservice 
+    spec:
+      containers:
+        - name: postgress-container
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"  
